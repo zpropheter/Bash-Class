@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Script Objectives
+# Understand prompting users for input | Store input as a variable | Show how to use input after entered by user |
+
 # Ask the user for login details
 
 #Prompt user for their username and show what they're typing
