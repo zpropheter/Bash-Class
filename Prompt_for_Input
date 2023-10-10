@@ -3,9 +3,11 @@
 # Ask the user for login details
 
 #Prompt user for their username and show what they're typing
+# -p will prompt the user for input
 read -p 'Username: ' uservar
 
 #Prompt user for their password but keep it secret
+# -s will take silent input
 read -sp 'Password: ' passvar
 
 #this puts a space between their input and the message we're going to send them
