@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#Script Objectives
+#Introduction to pwd | Change the working directory | Understanding different reasons to use each user variable | 
+
+#HARD CODED VARIABLES
+loggedInUser=$( echo "show State:/Users/ConsoleUser" | /usr/sbin/scutil | /usr/bin/awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+
+#Tell user their current working directory
+echo "The current working directory is $(pwd)"
+
+#change the current working directory to user's desktop
+
+# cd $HOME/desktop
+# cd /Users/zach.propheter/Desktop
+# cd /Users/$(whoami)/Desktop
+# cd /Users/$loggedInUser/Desktop
+
+#Tell user their new working directory
+echo "The new working directory is $(pwd)"
