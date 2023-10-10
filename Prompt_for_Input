@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Ask the user for login details
+
+#Prompt user for their username and show what they're typing
+read -p 'Username: ' uservar
+
+#Prompt user for their password but keep it secret
+read -sp 'Password: ' passvar
+
+#this puts a space between their input and the message we're going to send them
+echo
+
+#this is out message to the user
+echo Thank you $uservar we now have your login details
+
+#extra message to demonstrate that password is still readable
+echo "Just to be sure, is your password: $passvar?"
