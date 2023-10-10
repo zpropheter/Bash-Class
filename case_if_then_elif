@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# Script Objectives
+# Understand dynamic variables | Understand hard coded variables | Take user input | Utilize user input to output information | Case | If/then/elif statements
+
+#This first line is to set our shell. Since we're writing in bash, we'll want the shebang (#!) and the /bin/bash directory
+#Lines that start with # can be used to remind yourself what the script does. It's also good for telling other people what you're doing in case they run into an error
+#Now that we've established the basics, let's go to the next step
+
+#When we setup a script, we want to define any known or permanent variables at the beginning. This means if we ever have to go looking for them, we don't have to dig through the script for that information.
+
+#Below we are going to set myName as a variable, change it to your name so you can see how it works. The value of myName is surrounded by quotes to tell the script that it's just text and not a command. I'll enter some extra variables that could also change for reference to the next portion of our script
+myName="zach.propheter"
+# 'date' is also a command, to get it to print we can just type it or we can wrap it like below so that we can pair other commands or text with it. For now, it'll just be the date command
+todaysDate=$(date)
+# most people won't change their favorite color, but other people are using this script and their color might be the same or different from mine
+favoriteColor="Blue"
+
+
+#myName might change depending on who's running the script so it's a dynamic variable. We may also want to hard code variables that won't change. They're entered the same as dynamic variables, but it's good to group them separately so the next user knows they don't need to change them
+
+#Here's some hard coded variables that should never need to change for our script
+earth="Third rock from the sun"
+skyColor="Blue"
+
+#Now that we know what the definitions of each variable are, we can make a simple script to check for user input and provide an answer based on what they select
+#First lets prompt the user for input
+
+echo -e "Welcome to scripting class. This script is very basic and can tell you some information based on what you select.\n Please tell us what you would like to know:\n1) My Name\n2) Today's Date\n3) My Favorite Color\n4) Joe Diffie's Best Song\n5) What color the Sky is\n"
+read -p 'Enter the number of your selection: 
+' userSelection
+
+#This is a way to verify we can read the selection the admin made
+echo "User option selected is: $userSelection"
+
+
+#Now we're going to build a basic function with 'case' and 'if/then' statements. Case takes user or variable input from the script and runs based on those conditions without making a massive 'if/then' statement
+
+#Case is better for making selection and running with the information. Since we've stored user response as a known value, we can define the value for each part of the case statement and tell it what to do
+
+#For this case, we look at the value of the selection for $userSelection
+case $userSelection in
+	#When the value is 1 do the following
+	1)
+		echo "My name is $myName"
+	;;
+	#When the value is 2 do the following
+	2)
+		echo "Today's date is $todaysDate"
+	;;
+	#When the value is 3 do the following
+	3)
+		echo "My favorite color is $favoriteColor"
+	;;
+	#When the value is 4 do the following
+	4)
+		echo "Joe Diffie's Best Song is $earth"
+	;;
+	#When the value is 5 do the following
+	5)
+		echo "The sky is $skyColor"
+	;;
+	#When the value is anything else, do the following
+	*)
+		echo "What are you doing??? That's not an option!!! Stop trying to break my script."
+	;;
+esac
+
+#We can also do the same evaluation with an if/then/elif statement. This can get a little more complicated but is essentially doing the same thing as the case statement, just with some extra statement
+
+#If $userSelection is 1 then do the command
+if [[  $userSelection == "1" ]]; then
+	echo "My name is $myName"
+#If $userSelection is not 1 and is 2 then do the command
+elif [[  $userSelection == "2" ]]; then
+	echo "Today's date is $todaysDate"
+	#If $userSelection is not 1, or 2 and is 3 then do the command
+elif [[  $userSelection == "3" ]]; then
+	echo echo "My favorite color is $favoriteColor"
+	#If $userSelection is not 1, 2, or 3,  and is 4 then do the command
+elif [[  $userSelection == "4" ]]; then
+	echo "Joe Diffie's Best Song is $earth"
+	#If $userSelection is not 1, 2, 3, or 4 and is 5 then do the command
+elif [[  $userSelection == "5" ]]; then
+	echo "The sky is $skyColor"
+	#Its important to note that if/then and if/then/elif will go line by line for the argument that matches. So where we previously noted that the 'if' statement for 2-5 says it's not the preceding numbers it's simply because we've already checked them, not because there's anything to verify that they are not those values.
+	#The final elif statement gets a little complicated. We're saying explicitly that the $userSelection value cannot be any number 1-5. This makes sure that if for some reason the previous steps were missing a number, it doesn't tell them they selected the wrong option. So we have to define each selection and say 'does not equal' using != instead of == like in the previous portions.
+elif [[  $userSelection != "1" ]] && [[  $userSelection != "2" ]] && [[  $userSelection != "3" ]] && [[  $userSelection != "4" ]] && [[  $userSelection != "5" ]]; then
+	echo "What are you doing??? That's not an option!!! Stop trying to break my script."
+fi
+
+
+#In both scenarios you're getting the same result. If we look examine each one equally, we can observe that 'case' is a simpler way to evaluate the $userSelection value without needing to remember the logic for if/then statements or combine value calculations for the final statement since case just uses a wildcard
+
